@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIO Thailand Group Link Tree</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-grad-a: #e0f7fa;
+      --bg-grad-b: #f4f4f4;
+      --title: #00796b;
+      --txt: #2b2b2b;
+      --muted: #666;
+      --chip: rgba(255,255,255,0.35);
+      --chip-border: rgba(255,255,255,0.6);
+      --innotech-a: #4fc3f7;
+      --innotech-b: #81c784;
+      --innotech-a-hover: #29b6f6;
+      --innotech-b-hover: #66bb6a;
+      --thai-a: #42a5f5;
+      --thai-b: #1e88e5;
+      --thai-a-hover: #2196f3;
+      --thai-b-hover: #1565c0;
+      --profile-a: #607d8b;
+      --profile-b: #455a64;
+      --profile-a-hover: #546e7a;
+      --profile-b-hover: #37474f;
+      --maps-a: #34a853;
+      --maps-b: #1a73e8;
+      --maps-a-hover: #2d9249;
+      --maps-b-hover: #1558b0;
+      --phone-a: #9575cd;
+      --phone-b: #7986cb;
+      --phone-a-hover: #7e57c2;
+      --phone-b-hover: #5c6bc0;
+      --youtube-a: #ff4d4d;
+      --youtube-b: #ff1a1a;
+      --youtube-a-hover: #e60000;
+      --youtube-b-hover: #b30000;
+    }
+
+    html, body { height: 100%; }
+    body {
+      font-family: 'IBM Plex Sans Thai', sans-serif;
+      margin: 0;
+      padding: 0 14px;
+      background: linear-gradient(135deg, var(--bg-grad-a), var(--bg-grad-b));
+      text-align: center;
+      color: var(--txt);
+      animation: fadeInUp 0.9s ease-out;
+      display: grid;
+      place-items: start center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      padding: 22px 0 10px;
+      animation: fadeInUp 1.1s ease-out;
+    }
+
+    .logo {
+      max-width: 110px;
+      height: auto;
+      margin: 6px auto 4px;
+      display: block;
+      animation: fadeInUp 1.2s ease-out;
+    }
+
+    h1 {
+      margin: 6px 0 2px;
+      font-size: 1.3rem;
+      line-height: 1.25;
+      color: var(--title);
+      font-weight: 600;
+      animation: fadeInUp 1.25s ease-out;
+    }
+
+    p.lead {
+      margin: 0 0 14px;
+      color: var(--muted);
+      animation: fadeInUp 1.3s ease-out;
+    }
+
+    .section-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      margin: 14px auto 8px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      backdrop-filter: blur(4px);
+      background: var(--chip);
+      border: 1px solid var(--chip-border);
+      color: var(--txt);
+      animation: fadeInUp 1.35s ease-out;
+    }
+
+    .links {
+      display: grid;
+      gap: 10px;
+      margin: 8px 0 16px;
+    }
+
+    .link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.16);
+      transition: transform .15s ease, box-shadow .15s ease, background .2s ease;
+      animation: fadeInUp 1.5s ease-out;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .link:active { transform: translateY(1px) scale(0.997); }
+
+    .link i { font-size: 1.15rem; }
+
+    .innotech { background: linear-gradient(45deg, var(--innotech-a), var(--innotech-b)); }
+    .innotech:hover { background: linear-gradient(45deg, var(--innotech-a-hover), var(--innotech-b-hover)); }
+
+    .thailand { background: linear-gradient(45deg, var(--thai-a), var(--thai-b)); }
+    .thailand:hover { background: linear-gradient(45deg, var(--thai-a-hover), var(--thai-b-hover)); }
+
+    .profile { background: linear-gradient(45deg, var(--profile-a), var(--profile-b)); }
+    .profile:hover { background: linear-gradient(45deg, var(--profile-a-hover), var(--profile-b-hover)); }
+
+    .phone { background: linear-gradient(45deg, var(--phone-a), var(--phone-b)); }
+    .phone:hover { background: linear-gradient(45deg, var(--phone-a-hover), var(--phone-b-hover)); }
+
+    .youtube { background: linear-gradient(45deg, var(--youtube-a), var(--youtube-b)); }
+    .youtube:hover { background: linear-gradient(45deg, var(--youtube-a-hover), var(--youtube-b-hover)); }
+
+    .maps { background: linear-gradient(45deg, var(--profile-a), var(--profile-b)); cursor: pointer; border: none; font-family: inherit; font-size: 1rem; }
+    .maps:hover { background: linear-gradient(45deg, var(--profile-a-hover), var(--profile-b-hover)); }
+
+    /* Lightbox */
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .lightbox-overlay.active { display: flex; }
+    .lightbox-overlay.visible { opacity: 1; }
+    .lightbox-box {
+      background: #fff;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 560px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(24px) scale(0.97);
+      transition: transform 0.35s cubic-bezier(0.34,1.1,0.64,1);
+      overflow: hidden;
+    }
+    .lightbox-overlay.visible .lightbox-box { transform: translateY(0) scale(1); }
+
+    .lightbox-handle { display: none; }
+    .lightbox-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px 8px;
+    }
+    .lightbox-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #333;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .lightbox-title i { color: #607d8b; }
+    .lightbox-header-actions { display: flex; gap: 6px; }
+    .lightbox-icon-btn {
+      background: #f5f5f5;
+      color: #444;
+      border: none;
+      border-radius: 8px;
+      width: 32px; height: 32px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .lightbox-icon-btn:hover { background: #e8e8e8; }
+
+    .lightbox-img-wrap {
+      overflow: hidden;
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f9f9f9;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      cursor: grab;
+    }
+    .lightbox-img-wrap:active { cursor: grabbing; }
+    .lightbox-img-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transform-origin: center center;
+      transition: transform 0.1s ease;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+
+    .lightbox-nav {
+      padding: 12px 16px 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+    .lightbox-nav-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      padding: 10px 6px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.72rem;
+      border: 1.5px solid #eee;
+      color: #333;
+      background: #fafafa;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .lightbox-nav-btn:hover { background: #f0f0f0; border-color: #ddd; }
+    .lightbox-nav-btn:active { transform: scale(0.96); }
+    .lightbox-nav-btn i { font-size: 1.3rem; }
+    .lightbox-nav-btn.gmaps i { color: #ea4335; }
+    .lightbox-nav-btn.apple i { color: #ea4335; }
+    .lightbox-nav-btn.waze  i { color: #ea4335; }
+    .lightbox-nav-btn svg { width: 1.3rem; height: 1.3rem; flex-shrink: 0; }
+    .lightbox-nav-btn img.maps-logo { width: 1.4rem; height: 1.4rem; flex-shrink: 0; }
+
+    footer {
+      padding: 12px 0 22px;
+      font-size: 0.9rem;
+      color: #555;
+      animation: fadeInUp 1.6s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(18px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://bioinnotechthailand.com/link/logo.png" alt="Logo" class="logo" />
+    <h1>BIO THAILAND GROUP</h1>
+    <p class="lead">ผู้นำด้านนวัตกรรมผลิตภัณฑ์เพื่อการแพทย์และสาธารณสุข</p>
+
+    <div class="section-title"><i class="fa-solid fa-microscope"></i>สินค้าการแพทย์</div>
+    <div class="links">
+      <a href="https://bioinnotech.co.th" class="link innotech">
+        <i class="fa-solid fa-globe"></i> เว็บไซต์ บริษัท ไบโอ อินโน เทค จำกัด
+      </a>
+      <a href="https://lin.ee/viU8yygf" class="link innotech">
+        <i class="fa-brands fa-line"></i> ไลน์ บริษัท ไบโอ อินโน เทค จำกัด
+      </a>
+    </div>
+
+    <div class="section-title"><i class="fa-solid fa-leaf"></i>สินค้าสาธาณสุขและสิ่งแวดล้อม</div>
+    <div class="links">
+      <a href="https://bioinnotechthailand.com" class="link thailand">
+        <i class="fa-solid fa-globe"></i> เว็บไซต์ บริษัท ไบโอ อินโน เทค (ไทยแลนด์) จำกัด
+      </a>
+      <a href="https://lin.ee/BaKipXd" class="link thailand">
+        <i class="fa-brands fa-line"></i> ไลน์ บริษัท ไบโอ อินโน เทค (ไทยแลนด์) จำกัด
+      </a>
+    </div>
+
+    <div class="section-title"><i class="fa-solid fa-headset"></i>ติดต่อเรา</div>
+    <div class="links">
+      <a href="tel:021525405" class="link phone">
+        <i class="fa-solid fa-phone"></i> โทรศัพท์ 02-152-5405
+      </a>
+      <a href="https://www.youtube.com/@yourchannel" target="_blank" class="link youtube">
+        <i class="fa-brands fa-youtube"></i> YouTube Channel
+      </a>
+    </div>
+
+	
+    <div class="section-title"><i class="fa-solid fa-ellipsis"></i> อื่นๆ</div>
+    <div class="links">
+      <a href="https://bioinnotechthailand.com/link/single-bio-company-profile-th.pdf" target="_blank" class="link profile">
+        <i class="fa-solid fa-download"></i> Company Profile (ภาษาไทย)
+      </a>
+      <a href="https://bioinnotechthailand.com/link/single-bio-company-profile-en.pdf" target="_blank" class="link profile">
+        <i class="fa-solid fa-download"></i> Company Profile (English)
+      </a>
+      <button class="link maps" onclick="const lb=document.getElementById('mapsLightbox');lb.classList.add('active');requestAnimationFrame(()=>lb.classList.add('visible'))">
+        <i class="fa-solid fa-map"></i> แผนที่การเดินทาง
+      </button>
+    </div>
+  </div>
+
+  <!-- Directional Map Lightbox -->
+  <div class="lightbox-overlay" id="mapsLightbox" onclick="if(event.target===this){this.classList.remove('visible');setTimeout(()=>this.classList.remove('active'),300)}">
+    <div class="lightbox-box">
+      <div class="lightbox-handle"></div>
+      <div class="lightbox-header">
+        <span class="lightbox-title"><i class="fa-solid fa-map-location-dot"></i> แผนที่การเดินทาง</span>
+        <div class="lightbox-header-actions">
+          <a href="bio-group-directional.jpg" download="bio-group-directional.jpg" class="lightbox-icon-btn" title="Download">
+            <i class="fa-solid fa-download"></i>
+          </a>
+          <button class="lightbox-icon-btn" id="lbCloseBtn" title="Close">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+      <div class="lightbox-img-wrap">
+        <img src="bio-group-directional.jpg" alt="แผนที่การเดินทาง" />
+      </div>
+      <div class="lightbox-nav">
+        <a href="https://maps.app.goo.gl/FvGAfL9bj6tY2RtH9" target="_blank" class="lightbox-nav-btn gmaps">
+          <img class="maps-logo" src="google-maps-svgrepo-com.svg" alt="Google Maps" />
+          ไบโอ อินโน เทค<br>(ไทยแลนด์)<br><span style="font-size:0.65rem;font-weight:400;opacity:0.6;">BIO Inno Tech (Thailand)</span>
+        </a>
+        <a href="https://maps.app.goo.gl/fknvCbX9iD8z2cUH8" target="_blank" class="lightbox-nav-btn apple">
+          <img class="maps-logo" src="google-maps-svgrepo-com.svg" alt="Google Maps" />
+          ไบโอ อินโน เทค<br>กรีน เวิลด์<br><span style="font-size:0.65rem;font-weight:400;opacity:0.6;">BIO Inno Tech Green World</span>
+        </a>
+        <a href="https://maps.app.goo.gl/Zvwsrad8fpxDz4fv5" target="_blank" class="lightbox-nav-btn waze">
+          <img class="maps-logo" src="google-maps-svgrepo-com.svg" alt="Google Maps" />
+          ไบโอ อินโน เทค<br><span style="font-size:0.65rem;font-weight:400;opacity:0.6;">BIO Inno Tech</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const wrap = document.querySelector('.lightbox-img-wrap');
+      const img = wrap.querySelector('img');
+      let scale = 1, translateX = 0, translateY = 0;
+      let pointers = [];
+      let initDist = 0, initScale = 1, initMid = null;
+      let dragStart = null;
+
+      wrap.style.touchAction = 'none';
+
+      function applyTransform(animated) {
+        img.style.transition = animated ? 'transform 0.2s ease' : 'none';
+        img.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      }
+
+      function clampPan() {
+        const ww = wrap.clientWidth, wh = wrap.clientHeight;
+        const iw = img.clientWidth, ih = img.clientHeight;
+        const maxX = Math.max(0, (iw * scale - ww) / 2);
+        const maxY = Math.max(0, (ih * scale - wh) / 2);
+        translateX = Math.min(maxX, Math.max(-maxX, translateX));
+        translateY = Math.min(maxY, Math.max(-maxY, translateY));
+      }
+
+      function resetTransform(animated) {
+        scale = 1; translateX = 0; translateY = 0;
+        applyTransform(animated !== false);
+      }
+
+      function closeLightbox() {
+        const lb = document.getElementById('mapsLightbox');
+        lb.classList.remove('visible');
+        setTimeout(() => lb.classList.remove('active'), 300);
+        resetTransform(true);
+      }
+
+      document.getElementById('mapsLightbox').addEventListener('click', function(e) {
+        if (e.target === this) closeLightbox();
+      });
+      document.getElementById('lbCloseBtn').addEventListener('click', closeLightbox);
+
+      function getPointer(id) { return pointers.find(p => p.pointerId === id); }
+
+      wrap.addEventListener('pointerdown', e => {
+        e.preventDefault();
+        wrap.setPointerCapture(e.pointerId);
+        pointers.push(e);
+
+        if (pointers.length === 1) {
+          dragStart = { x: e.clientX - translateX, y: e.clientY - translateY };
+        }
+        if (pointers.length === 2) {
+          dragStart = null;
+          initDist = Math.hypot(pointers[0].clientX - pointers[1].clientX, pointers[0].clientY - pointers[1].clientY);
+          initScale = scale;
+          initMid = { x: (pointers[0].clientX + pointers[1].clientX) / 2, y: (pointers[0].clientY + pointers[1].clientY) / 2 };
+        }
+      });
+
+      wrap.addEventListener('pointermove', e => {
+        e.preventDefault();
+        const idx = pointers.findIndex(p => p.pointerId === e.pointerId);
+        if (idx === -1) return;
+        pointers[idx] = e;
+
+        if (pointers.length === 2) {
+          const dist = Math.hypot(pointers[0].clientX - pointers[1].clientX, pointers[0].clientY - pointers[1].clientY);
+          const newScale = Math.min(5, Math.max(1, initScale * (dist / initDist)));
+          const mid = { x: (pointers[0].clientX + pointers[1].clientX) / 2, y: (pointers[0].clientY + pointers[1].clientY) / 2 };
+          translateX += mid.x - initMid.x;
+          translateY += mid.y - initMid.y;
+          translateX = translateX * (newScale / scale);
+          translateY = translateY * (newScale / scale);
+          scale = newScale;
+          initMid = mid;
+          clampPan();
+          applyTransform(false);
+        } else if (pointers.length === 1 && dragStart && scale > 1) {
+          translateX = e.clientX - dragStart.x;
+          translateY = e.clientY - dragStart.y;
+          clampPan();
+          applyTransform(false);
+        }
+      });
+
+      function onPointerUp(e) {
+        pointers = pointers.filter(p => p.pointerId !== e.pointerId);
+        if (pointers.length === 0) {
+          dragStart = null;
+          if (scale < 1.05) resetTransform(true);
+        }
+        if (pointers.length === 1) {
+          dragStart = { x: pointers[0].clientX - translateX, y: pointers[0].clientY - translateY };
+        }
+      }
+      wrap.addEventListener('pointerup', onPointerUp);
+      wrap.addEventListener('pointercancel', onPointerUp);
+
+      // Double-tap to reset
+      let lastTap = 0;
+      wrap.addEventListener('pointerup', e => {
+        if (pointers.length !== 0) return;
+        const now = Date.now();
+        if (now - lastTap < 300) resetTransform(true);
+        lastTap = now;
+      });
+    })();
+  </script>
+  <footer>
+    &copy; 2025 BIO Thailand Group. สงวนลิขสิทธิ์.
+  </footer>
+</body>
+</html>
